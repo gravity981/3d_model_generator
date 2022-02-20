@@ -11,7 +11,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
@@ -22,23 +21,53 @@ jobs:
       - name: Create 3D Tokens
         run: ./create_all_tokens.sh
       
-      - name: zip artifacts
-        uses: thedoctor0/zip-release@master
-        with:
-          path: './output'
-          type: 'zip'
-          filename: 'token_package.zip'
-      
       - name: upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: "token_package"
           path: |
-            token_package.zip
-      
+            output
+            
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      VERSION_FORMAT: ^[0-9]{2}\.[0-9]{2}\.[0-9]{2}$
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+        
+      - name: get latest tag
+        uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
+
+      - name: bump version
+        uses: actions-ecosystem/action-bump-semver@v1
+        id: bump-semver
+        with:
+          current_version: ${{ steps.get-latest-tag.outputs.tag }}
+          level: minor
+
+      - name: push version new version tag
+        uses: actions-ecosystem/action-push-tag@v1
+        with:
+          tag: ${{ steps.bump-semver.outputs.new_version }}
+        
+      - name: download artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: "token_package"
+        
+      - name: zip artifacts
+        uses: thedoctor0/zip-release@master
+        with:
+          path: './token_package'
+          type: 'zip'
+          filename: 'token_package.zip'
+
       - name: publish github release
         uses: ncipollo/release-action@v1
         with:
           artifacts: "./token_package.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.bump-semver.outputs.new_version }}
           draft: true
