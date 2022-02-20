@@ -52,12 +52,16 @@ with open(generated_config_filepath, 'w') as fp:
 # create stl files with openscad and previously generated parameter sets
 os.makedirs("output", exist_ok=True)
 try:
+    count = 0
     for paramset in openscad_config['parameterSets'].keys():
         openscad_command = 'openscad -o output/{}.{} -p {} -P {} {}'\
             .format(paramset, output_format, generated_config_filepath, paramset, args.scad_file)
         command_tokens = openscad_command.split(' ')
-        proc = subprocess.run(command_tokens)
+        proc = subprocess.run(command_tokens, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         proc.check_returncode()
+        print('created \"{}.{}\"'.format(paramset, output_format))
+        count += 1
+    print('created {} file(s)'.format(count))
 except Exception as e:
     print('error executing command: {}'.format(e))
     exit(1)
