@@ -7,6 +7,7 @@ import subprocess
 parser = argparse.ArgumentParser(description='Generate 3D Tokens')
 parser.add_argument('-s', '--scad-file', type=str, required=True, help='Path to SCAD file')
 parser.add_argument('-c', '--conf-file', type=str, required=True, help='Path to config file')
+parser.add_argument('-f', '--output-format', type=str, required=False, help='Format of output files')
 args = parser.parse_args()
 if not os.path.isfile(args.scad_file):
     print('scad file not found')
@@ -14,6 +15,10 @@ if not os.path.isfile(args.scad_file):
 if not os.path.isfile(args.conf_file):
     print('conf file not found')
     exit(1)
+if args.output_format is not None:
+    output_format = args.output_format
+else:
+    output_format = 'stl'
 
 # generate openSCAD parameter sets
 try:
@@ -48,8 +53,8 @@ with open(generated_config_filepath, 'w') as fp:
 os.makedirs("output", exist_ok=True)
 try:
     for paramset in openscad_config['parameterSets'].keys():
-        openscad_command = 'openscad -o output/{}.stl -p {} -P {} {}'.format(paramset, generated_config_filepath,
-                                                                        paramset, args.scad_file)
+        openscad_command = 'openscad -o output/{}.{} -p {} -P {} {}'\
+            .format(paramset, output_format, generated_config_filepath, paramset, args.scad_file)
         command_tokens = openscad_command.split(' ')
         proc = subprocess.run(command_tokens)
         proc.check_returncode()
