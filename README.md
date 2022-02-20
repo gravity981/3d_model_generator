@@ -4,6 +4,10 @@ This project is about generating parametric tokens for 3D printing. Tokens can b
 <img src="example.png" alt="example token" width="200"/>
 
 
+# Releases
+You can download the latest package with stl files from the release section. If you want to build the files on your own or want to modify something, please read on.
+
+
 # Prerequisites
 install the following tools on your linux system
 * python3
@@ -16,7 +20,7 @@ install the following tools on your linux system
 2. execute `create_all_tokens.sh`, this will create tokens based on `all_tokens.json`
 3. As an alternative, call `python3 token_generator.py -s token_3d.scard -c CONFIG_FILE` with your own `CONFIG_FILE`
 
-Have a look at [default_token.json]() to see the possible parameters which can be configured. Change it according to your needs.
+Have a look at [default_token.json](default_token.json) to see the possible parameters which can be configured. Change it according to your needs.
 
 The output of the generator is one or more stl files. In order to 3d-print the tokens the stl files have to be processed with a slicer.
 
@@ -26,4 +30,4 @@ Tested with Ubuntu 18, python 3.6.9 and OpenSCAD version 2021.01
 
 
 # Contribute
-Have a look at [all_tokens.json](). Open a PR to extend this json file with the config you want to add.
+Have a look at [all_tokens.json](all_tokens.json). Open a PR to extend this json file with the config you want to add.
