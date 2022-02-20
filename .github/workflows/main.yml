@@ -2,6 +2,11 @@ name: publish release
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: 'Version with format xx.yy.zz'
+        required: false
 
 jobs:
   build:
@@ -16,3 +21,24 @@ jobs:
 
       - name: Create 3D Tokens
         run: ./create_all_tokens.sh
+      
+      - name: zip artifacts
+        uses: thedoctor0/zip-release@master
+        with:
+          path: './output'
+          type: 'zip'
+          filename: 'token_package.zip'
+      
+      - name: upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: "token_package"
+          path: |
+            token_package.zip
+      
+      - name: publish github release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "./token_package.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          draft: true
