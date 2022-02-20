@@ -4,15 +4,18 @@ token_height=2;
 
 //key ring hole
 hole_diameter=4;
-distance=3; //distance from border
+hole_border_distance=3; //distance from border
 
 //decal
 decal_enabled=true;
-character="♣";
-size=38;
-y_offset=-4;
+decal_text="A"; //♣€★♥♦♠
+y_offset=0.0005*pow(token_diameter,2)+0.117*token_diameter+(-6.6);
 z_rotation=0;
-font="Helvetica:style=Bold";
+font="Stencilia\\-A:style=Regular";
+manual_font_size_enabled=false;
+manual_font_size=10;
+font_size=manual_font_size_enabled ? manual_font_size : 0.0055*pow(token_diameter,2)+1.17*token_diameter+(-1.95);
+
 
 difference() {
     cylinder(token_height, token_diameter, token_diameter);
@@ -21,13 +24,13 @@ difference() {
         #rotate([0,0,z_rotation]) {
             translate([0,y_offset,-1]) {
                 linear_extrude(height=token_height+2) {
-                    text(character,font=font,size=size,halign="center",valign="center",script="utf-8");
+                    text(decal_text,font=font,size=font_size,halign="center",valign="center",script="utf-8");
                 }
             }
         }
     }
     
-    #translate([0,token_diameter-hole_diameter-distance,-1]) {
+    #translate([0,token_diameter-hole_diameter-hole_border_distance,-1]) {
         cylinder(token_height+2, hole_diameter, hole_diameter);
     }
 }

@@ -1,0 +1,14 @@
+{
+  "tokens": [{
+    "token_diameter": 27.3,
+    "token_height": 2,
+    "token_name": "token_2CHF"
+  }],
+  "decals": [{
+    "decal_text": "A"
+  }],
+  "keyring_hole": {
+    "diameter": 4,
+    "distance_to_border": 3
+  }
+}
