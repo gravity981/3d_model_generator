@@ -1,14 +1,144 @@
 {
-  "tokens": [{
-    "token_diameter": 27.3,
-    "token_height": 2,
-    "token_name": "token_2CHF"
-  }],
-  "decals": [{
-    "decal_text": "A"
-  }],
+  "tokens": [
+    {
+      "token_diameter": 27.3,
+      "token_height": 2.1,
+      "token_name": "token_2CHF"
+    },
+    {
+      "token_diameter": 23.1,
+      "token_height": 1.6,
+      "token_name": "token_1CHF"
+    },
+    {
+      "token_diameter": 23.2,
+      "token_height": 2.3,
+      "token_name": "token_1EUR"
+    }
+  ],
   "keyring_hole": {
-    "diameter": 4,
-    "distance_to_border": 3
-  }
+    "hole_diameter": 4,
+    "hole_border_distance": 3
+  },
+  "decals": [
+    {
+      "decal_text": "A"
+    },
+    {
+      "decal_text": "B"
+    },
+    {
+      "decal_text": "C"
+    },
+    {
+      "decal_text": "D"
+    },
+    {
+      "decal_text": "E"
+    },
+    {
+      "decal_text": "F"
+    },
+    {
+      "decal_text": "G"
+    },
+    {
+      "decal_text": "H"
+    },
+    {
+      "decal_text": "I"
+    },
+    {
+      "decal_text": "J"
+    },
+    {
+      "decal_text": "K"
+    },
+    {
+      "decal_text": "L"
+    },
+    {
+      "decal_text": "M"
+    },
+    {
+      "decal_text": "N"
+    },
+    {
+      "decal_text": "O"
+    },
+    {
+      "decal_text": "P"
+    },
+    {
+      "decal_text": "Q"
+    },
+    {
+      "decal_text": "R"
+    },
+    {
+      "decal_text": "S"
+    },
+    {
+      "decal_text": "T"
+    },
+    {
+      "decal_text": "U"
+    },
+    {
+      "decal_text": "V"
+    },
+    {
+      "decal_text": "W"
+    },
+    {
+      "decal_text": "X"
+    },
+    {
+      "decal_text": "Y"
+    },
+    {
+      "decal_text": "Z"
+    },
+    {
+      "decal_text": "€",
+      "decal_name": "euro"
+    },
+    {
+      "decal_text": "$",
+      "decal_name": "dollar"
+    },
+    {
+      "decal_text": "£",
+      "decal_name": "pound"
+    },
+    {
+      "decal_text": "♥",
+      "decal_name": "heart",
+      "font": "Segoe Ui Symbol"
+    },
+    {
+      "decal_text": "♦",
+      "decal_name": "diamond",
+      "font": "Segoe Ui Symbol"
+    },
+    {
+      "decal_text": "♣",
+      "decal_name": "clover",
+      "font": "Segoe Ui Symbol"
+    },
+    {
+      "decal_text": "♠",
+      "decal_name": "spades",
+      "font": "Segoe Ui Symbol"
+    },
+    {
+      "decal_text": "★",
+      "decal_name": "star",
+      "font": "Segoe Ui Symbol",
+      "z_rotation": 35,
+      "x_offset": -1,
+      "manual_y_offset_enabled": true,
+      "manual_y_offset": 0
+    }
+  ]
 }

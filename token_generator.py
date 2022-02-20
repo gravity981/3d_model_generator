@@ -27,13 +27,17 @@ openscad_config['fileFormatVersion'] = '1'
 openscad_config['parameterSets'] = dict()
 for token in config['tokens']:
     for decal in config['decals']:
-        parameterset_name = '{}_{}'.format(token['token_name'], decal['decal_text'])
+        if 'decal_name' in decal.keys():
+            decal_text = decal['decal_name']
+        else:
+            decal_text = decal['decal_text']
+        parameterset_name = '{}_{}'.format(token['token_name'], decal_text)
         openscad_config['parameterSets'][parameterset_name] = dict()
         for k, v in token.items():
             openscad_config['parameterSets'][parameterset_name][k] = v
-        for k, v in decal.items():
-            openscad_config['parameterSets'][parameterset_name][k] = v
         for k, v in config['keyring_hole'].items():
+            openscad_config['parameterSets'][parameterset_name][k] = v
+        for k, v in decal.items():
             openscad_config['parameterSets'][parameterset_name][k] = v
 os.makedirs("generated", exist_ok=True)
 generated_config_filepath = 'generated/openscad.json'

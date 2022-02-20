@@ -5,10 +5,19 @@
     "token_name": "token_2CHF"
   }],
   "decals": [{
-    "decal_text": "A"
+    "decal_enabled": true,
+    "decal_text": "★",
+    "font": "Segoe Ui Symbol",
+    "manual_font_size_enabled": false,
+    "manual_font_size": 10,
+    "manual_y_offset_enabled": true,
+    "manual_y_offset": 0,
+    "z_rotation": 35,
+    "decal_name": "star",
+    "x_offset": -1
   }],
   "keyring_hole": {
-    "diameter": 4,
-    "distance_to_border": 3
+    "hole_diameter": 4,
+    "hole_border_distance": 3
   }
 }
