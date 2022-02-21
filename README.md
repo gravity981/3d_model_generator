@@ -14,7 +14,8 @@ You can download the latest package with stl files from the release section. If 
 
 
 # Prerequisites
-A Linux Docker environemnt is required to use the 3d model generator
+A Linux Docker environment is required to run the 3d model generator
+
 
 # Usage
 1. `docker pull gravity981/3dgen`
@@ -26,9 +27,5 @@ Have a look at [default_token.json](config/default_token.json) to see the possib
 The output of the generator is one or more stl files. In order to 3d-print the tokens the stl files have to be processed with a slicer.
 
 
-# Remarks
-Tested with Ubuntu 18, python 3.6.9 and OpenSCAD version 2021.01
-
-
 # Contribute
-Have a look at [all_tokens.json](config/all_tokens.json). Open a PR to extend this json file with the config you want to add.
+If you want to add a token have a look at [all_tokens.json](config/all_tokens.json). Open a PR to extend this json file with the config you want to add.
