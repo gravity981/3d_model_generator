@@ -1,5 +1,10 @@
-# 3D Token Generator
-This project is about generating parametric tokens for 3D printing. Tokens can be used for example in shopping trolleys.
+# 3D Model Generator
+This project is about generating parametric 3D models. The generated files can be processed with a slicer and then sent to a 3D printer. 
+
+![latest version](https://img.shields.io/github/v/release/gravity981/3d_model_generator)
+
+## Tokens
+Tokens can be used for example in shopping trolleys.
 
 <img src="example.png" alt="example token" width="200"/>
 
