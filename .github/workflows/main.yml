@@ -15,8 +15,9 @@ jobs:
           sudo apt-get install -y openscad
           ./scripts/install_fonts.sh
 
-      - name: Generate 3D Tokens
+      - name: Generate 3D Models
         run: |
+          echo openscad --version
           ./scripts/generate_all_tokens.sh
           ./scripts/stitch_thumbnails.sh
       
