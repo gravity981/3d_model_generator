@@ -19,7 +19,7 @@ jobs:
           run: |
             openscad --version
             xvfb-run -a ./scripts/generate_all_tokens.sh
-            xvfb-run -a ./scripts/stitch_thumbnails.sh
+            ./scripts/stitch_thumbnails.sh
       
       - name: upload artifacts
         uses: actions/upload-artifact@v2
