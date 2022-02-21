@@ -8,6 +8,7 @@ parser = argparse.ArgumentParser(description='Generate 3D Tokens')
 parser.add_argument('-s', '--scad-file', type=str, required=True, help='Path to SCAD file')
 parser.add_argument('-c', '--conf-file', type=str, required=True, help='Path to config file')
 parser.add_argument('-f', '--output-format', type=str, required=False, help='Format of output files')
+parser.add_argument('-t', '--thumbnails', action='store_true', required=False, help='Create thumbnails too')
 args = parser.parse_args()
 if not os.path.isfile(args.scad_file):
     print('scad file not found')
@@ -60,6 +61,13 @@ try:
         proc = subprocess.run(command_tokens, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         proc.check_returncode()
         print('created \"{}.{}\"'.format(paramset, output_format))
+        if args.thumbnails:
+            openscad_command = 'openscad -o output/{}.png -p {} -P {} --imgsize=192,192 {}'\
+                .format(paramset, generated_config_filepath, paramset, args.scad_file)
+            command_tokens = openscad_command.split(' ')
+            proc = subprocess.run(command_tokens, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            proc.check_returncode()
+            print('created \"{}.png\"'.format(paramset))
         count += 1
     print('created {} file(s)'.format(count))
 except Exception as e:

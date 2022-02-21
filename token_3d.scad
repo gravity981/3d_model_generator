@@ -19,7 +19,7 @@ x_offset=0;
 difference() {
     cylinder(token_height, token_radius, token_radius, $fn=100);
     if(decal_enabled) {
-        #rotate([0,0,z_rotation]) {
+        rotate([0,0,z_rotation]) {
             translate([x_offset,y_offset,-1]) {
                 linear_extrude(height=token_height+2) {
                     text(decal_text,font=font,size=font_size,halign="center",valign="center",script="utf-8");
@@ -27,7 +27,11 @@ difference() {
             }
         }
     }
-    #translate([0,token_radius-hole_radius-hole_border_distance,-1]) {
+    translate([0,token_radius-hole_radius-hole_border_distance,-1]) {
         cylinder(token_height+2, hole_radius, hole_radius, $fn=100);
     }
 }
+
+$vpr = [0,0,0];
+$vpt = [0,0,-10];
+$vpd = 90;
