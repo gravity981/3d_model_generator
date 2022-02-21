@@ -66,9 +66,8 @@ jobs:
       - name: publish github release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: |
-            "./token_package.zip"
-            "./token_package/poster.png"
+          artifacts: "token_package.zip,token_package/poster.png"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.bump-semver.outputs.new_version }}
           draft: true
+          body: "![poster](${{ github.server_url }}/${{ github.repository }}/releases/download/${{ steps.bump-semver.outputs.new_version }}/poster.png)"
