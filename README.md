@@ -25,7 +25,7 @@ install the following tools on your linux system
 2. execute `create_all_tokens.sh`, this will create tokens based on `all_tokens.json`
 3. As an alternative, call `python3 token_generator.py -s token_3d.scard -c CONFIG_FILE` with your own `CONFIG_FILE`
 
-Have a look at [default_token.json](default_token.json) to see the possible parameters which can be configured. Change it according to your needs.
+Have a look at [default_token.json](config/default_token.json) to see the possible parameters which can be configured. Change it according to your needs.
 
 The output of the generator is one or more stl files. In order to 3d-print the tokens the stl files have to be processed with a slicer.
 
@@ -35,4 +35,4 @@ Tested with Ubuntu 18, python 3.6.9 and OpenSCAD version 2021.01
 
 
 # Contribute
-Have a look at [all_tokens.json](all_tokens.json). Open a PR to extend this json file with the config you want to add.
+Have a look at [all_tokens.json](config/all_tokens.json). Open a PR to extend this json file with the config you want to add.

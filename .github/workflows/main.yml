@@ -13,10 +13,12 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get install -y openscad
-          ./install_fonts.sh
+          ./scripts/install_fonts.sh
 
-      - name: Create 3D Tokens
-        run: ./create_all_tokens.sh
+      - name: Generate 3D Tokens
+        run: |
+          ./scripts/generate_all_tokens.sh
+          ./scripts/stitch_thumbnails.sh
       
       - name: upload artifacts
         uses: actions/upload-artifact@v2
@@ -27,7 +29,7 @@ jobs:
             
   publish:
     runs-on: ubuntu-latest
-    needs: [ build ]
+    needs: [ scripts ]
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
@@ -56,14 +58,16 @@ jobs:
       - name: zip artifacts
         uses: thedoctor0/zip-release@master
         with:
-          path: './token_package'
+          path: './token_package/3d'
           type: 'zip'
           filename: 'token_package.zip'
 
       - name: publish github release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "./token_package.zip"
+          artifacts: |
+            "./token_package.zip"
+            "./token_package/poster.png"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.bump-semver.outputs.new_version }}
           draft: true

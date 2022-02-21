@@ -1,4 +1,9 @@
 {
+  "model": "token_3d.scad",
+  "keyring_hole": {
+    "hole_diameter": 4,
+    "hole_border_distance": 3
+  },
   "tokens": [
     {
       "token_diameter": 27.3,
@@ -16,10 +21,6 @@
       "token_name": "token_1EUR"
     }
   ],
-  "keyring_hole": {
-    "hole_diameter": 4,
-    "hole_border_distance": 3
-  },
   "decals": [
     {
       "decal_text": "A"
