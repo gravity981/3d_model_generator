@@ -1,8 +1,8 @@
 {
   "model": "token_3d.scad",
   "keyring_hole": {
-    "hole_diameter": 4,
-    "hole_border_distance": 3
+    "hole_diameter": 3,
+    "hole_border_distance": 2
   },
   "tokens": [
     {

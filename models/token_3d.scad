@@ -7,7 +7,7 @@ hole_radius=hole_diameter/2;
 decal_enabled=true;
 decal_text="X";
 z_rotation=0;
-font="Stencilia\\-A:style=Regular";
+font="Marsh Stencil";
 manual_font_size_enabled=false;
 manual_font_size=10;
 font_size=manual_font_size_enabled ? manual_font_size : -0.0025*pow(token_diameter,2)+0.975*token_diameter-8.777;
