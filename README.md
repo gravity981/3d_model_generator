@@ -14,16 +14,12 @@ You can download the latest package with stl files from the release section. If 
 
 
 # Prerequisites
-install the following tools on your linux system
-* python3
-* OpenSCAD
-* optional: meshlab
-
+A Linux Docker environemnt is required to use the 3d model generator
 
 # Usage
-1. execute `install_fonts.sh`, this will install the required default font
-2. execute `create_all_tokens.sh`, this will create tokens based on `all_tokens.json`
-3. As an alternative, call `python3 token_generator.py -s token_3d.scard -c CONFIG_FILE` with your own `CONFIG_FILE`
+1. `docker pull gravity981/3dgen`
+2. `sudo docker run -ti -v /path/to/git/repo:/work gravity981/3dgen`
+3. on the docker shell: `xvfb-run -a scripts/generate_all_tokens.sh`
 
 Have a look at [default_token.json](config/default_token.json) to see the possible parameters which can be configured. Change it according to your needs.
 
