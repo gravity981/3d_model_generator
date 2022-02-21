@@ -16,10 +16,15 @@ jobs:
           ./scripts/install_fonts.sh
 
       - name: Generate 3D Models
-        run: |
-          openscad --version
-          ./scripts/generate_all_tokens.sh
-          ./scripts/stitch_thumbnails.sh
+        uses: addnab/docker-run-action@v3
+        with:
+          registry: docker.io
+          image: gravity981/3dgen:1.0
+          options: -v ${{ github.workspace }}:/work
+          run: |
+            openscad --version
+            ./scripts/generate_all_tokens.sh
+            ./scripts/stitch_thumbnails.sh
       
       - name: upload artifacts
         uses: actions/upload-artifact@v2
