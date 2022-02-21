@@ -18,8 +18,8 @@ jobs:
           options: -v ${{ github.workspace }}:/work
           run: |
             openscad --version
-            ./scripts/generate_all_tokens.sh
-            ./scripts/stitch_thumbnails.sh
+            xvfb-run -a ./scripts/generate_all_tokens.sh
+            xvfb-run -a ./scripts/stitch_thumbnails.sh
       
       - name: upload artifacts
         uses: actions/upload-artifact@v2
