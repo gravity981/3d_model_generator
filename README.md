@@ -20,10 +20,12 @@ A Linux Docker environment is required to run the 3d model generator
 # Usage
 Clone this repository and run:
 ```
-sudo docker run -v /path/to/git/repo:/work gravity981/3dgen
-    -m models \
-    -c config/example_token.json \
-    -o output
+sudo docker run -v $PWD:/work gravity981/3dgen \
+  -m models \
+  -c config/example_token.json \
+  -o output/example_token \
+  --thumbnails \
+  --poster
 ```
 
 Have a look at [example_token.json](config/example_token.json) to see the possible parameters which can be configured. Change it according to your needs.

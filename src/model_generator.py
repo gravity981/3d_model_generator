@@ -7,11 +7,12 @@ import subprocess
 
 # read command arguments
 parser = argparse.ArgumentParser(description='Generate 3D Tokens')
-parser.add_argument('-s', '--model-dir', type=str, required=True, help='Path to models directory')
+parser.add_argument('-m', '--model-dir', type=str, required=True, help='Path to models directory')
 parser.add_argument('-c', '--conf-file', type=str, required=True, help='Path to config file')
 parser.add_argument('-o', '--output-dir', type=str, required=True, help='Path to output directory')
 parser.add_argument('-f', '--output-format', type=str, required=False, help='Format of output files')
 parser.add_argument('-t', '--thumbnails', action='store_true', required=False, help='Create thumbnails too')
+parser.add_argument('-p', '--poster', action='store_true', required=False, help='Create poster with stitched thumbnails')
 args = parser.parse_args()
 if not os.path.isdir(args.model_dir):
     print('model directory not found')
@@ -68,19 +69,23 @@ try:
     for paramset in openscad_config['parameterSets'].keys():
         openscad_command = 'openscad -o {}/3d/{}.{} -p {} -P {} {}'\
             .format(args.output_dir, paramset, output_format, generated_config_filepath, paramset, scad_file)
-        command_tokens = openscad_command.split(' ')
-        proc = subprocess.run(command_tokens, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        proc = subprocess.run(openscad_command.split(' '), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         proc.check_returncode()
         print('created \"{}.{}\"'.format(paramset, output_format))
         if args.thumbnails:
             openscad_command = 'openscad -o {}/thumbnail/{}.png -p {} -P {} --imgsize=192,192 {}'\
                 .format(args.output_dir, paramset, generated_config_filepath, paramset, scad_file)
-            command_tokens = openscad_command.split(' ')
-            proc = subprocess.run(command_tokens, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            proc = subprocess.run(openscad_command.split(' '), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             proc.check_returncode()
             print('created \"{}.png\"'.format(paramset))
         count += 1
-    print('created {} file(s)'.format(count))
+    print('created {} 3d file(s)'.format(count))
 except Exception as e:
     print('error executing command: {}'.format(e))
     exit(1)
+
+if args.thumbnails and args.poster:
+    command = 'montage -tile {}x0 -geometry +0+0 {}/thumbnail/*.png {}/poster.png'.format(11, args.output_dir, args.output_dir)
+    proc = subprocess.run(command.split(' '), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    proc.check_returncode()
+    print('created \"poster.png\"')
