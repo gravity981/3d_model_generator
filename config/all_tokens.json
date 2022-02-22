@@ -1,7 +1,7 @@
 {
   "model": "token_3d.scad",
   "global": {
-    "hole_diameter": 3,
+    "hole_diameter": 4,
     "hole_border_distance": 2
   },
   "geometries": [
@@ -132,7 +132,8 @@
     },
     {
       "decal_text": "€",
-      "decal_name": "euro"
+      "decal_name": "euro",
+      "x_offset": -1
     },
     {
       "decal_text": "$",
@@ -166,10 +167,11 @@
       "decal_text": "★",
       "decal_name": "star",
       "font": "Segoe Ui Symbol",
-      "z_rotation": 35,
-      "x_offset": -1,
+      "z_rotation": 36,
+      "x_offset": -0.7,
       "manual_y_offset_enabled": true,
-      "manual_y_offset": 0
+      "manual_y_offset": -1,
+      "font_size_multiplier": 1.25
     }
   ]
 }
