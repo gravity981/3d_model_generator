@@ -1,4 +1,4 @@
-name: publish release
+name: publish models
 
 on:
   workflow_dispatch:
