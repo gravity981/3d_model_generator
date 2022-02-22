@@ -18,9 +18,13 @@ A Linux Docker environment is required to run the 3d model generator
 
 
 # Usage
-1. `docker pull gravity981/3dgen`
-2. `sudo docker run -ti -v /path/to/git/repo:/work gravity981/3dgen`
-3. on the docker shell: `xvfb-run -a scripts/generate_all_tokens.sh`
+Clone this repository and run:
+```
+sudo docker run -v /path/to/git/repo:/work gravity981/3dgen
+    -m models \
+    -c config/default_config.json \
+    -o output
+```
 
 Have a look at [default_token.json](config/default_token.json) to see the possible parameters which can be configured. Change it according to your needs.
 

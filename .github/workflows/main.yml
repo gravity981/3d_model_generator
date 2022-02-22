@@ -14,10 +14,9 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           registry: docker.io
-          image: gravity981/3dgen:1.0
+          image: gravity981/3dgen:2.0
           options: -v ${{ github.workspace }}:/work
-          run: |
-            ./scripts/generate_all_tokens.sh
+          run: /usr/bin/3d_model_generator.sh -m models -c config/all_tokens.json -o output
       
       - name: upload artifacts
         uses: actions/upload-artifact@v2
