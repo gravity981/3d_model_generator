@@ -3,6 +3,9 @@ name: publish models
 on:
   workflow_dispatch:
 
+env:
+  DOCKER_IMAGE_VERSION: 2.0
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,7 +17,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           registry: docker.io
-          image: gravity981/3dgen:2.0
+          image: gravity981/3dgen:${{ env.DOCKER_IMAGE_VERSION }}
           options: -v ${{ github.workspace }}:/work --user root
           run: /usr/bin/generate_3d_models.sh -m models -c config/all_tokens.json -o output/tokens -t -p
       
@@ -31,22 +34,6 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
-        
-      - name: get latest tag
-        uses: actions-ecosystem/action-get-latest-tag@v1
-        id: get-latest-tag
-
-      - name: bump version
-        uses: actions-ecosystem/action-bump-semver@v1
-        id: bump-semver
-        with:
-          current_version: ${{ steps.get-latest-tag.outputs.tag }}
-          level: minor
-
-      - name: push version new version tag
-        uses: actions-ecosystem/action-push-tag@v1
-        with:
-          tag: ${{ steps.bump-semver.outputs.new_version }}
         
       - name: download artifacts
         uses: actions/download-artifact@v1
@@ -65,6 +52,8 @@ jobs:
         with:
           artifacts: "token_package.zip,token_package/poster.png"
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.bump-semver.outputs.new_version }}
           draft: true
-          body: "![poster](${{ github.server_url }}/${{ github.repository }}/releases/download/${{ steps.bump-semver.outputs.new_version }}/poster.png)"
+          body: |
+            based on config of revision ${{ github.sha }}
+            ![poster](${{ github.server_url }}/${{ github.repository }}/releases/download/<EDIT_THIS>/poster.png)
+          name: "Models-${{ env.DOCKER_IMAGE_VERSION }}-${{ github.run_number }}"
