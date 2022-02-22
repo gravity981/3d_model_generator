@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /work
 COPY fonts fonts
 RUN mkdir -p ~/.local/share/fonts && \
-    cp fonts/*.*tf ~/.local/share/fonts && \
+    cp fonts/*.*tf /usr/local/share/fonts && \
     fc-cache -f -v && \
     rm -rf fonts
 COPY src src
