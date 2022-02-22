@@ -16,7 +16,7 @@ jobs:
           registry: docker.io
           image: gravity981/3dgen:2.0
           options: -v ${{ github.workspace }}:/work
-          run: /usr/bin/3d_model_generator.sh -m models -c config/all_tokens.json -o output
+          run: /usr/bin/generate_3d_models.sh -m models -c config/all_tokens.json -o output
       
       - name: upload artifacts
         uses: actions/upload-artifact@v2
