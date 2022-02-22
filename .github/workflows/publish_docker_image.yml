@@ -1,7 +1,14 @@
 name: publish docker image
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+    tags:
+      - 'v*'
+    pull_request:
+      branches:
+        - 'main'
 
 jobs:
   push_to_registry:
@@ -22,6 +29,11 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: gravity981/3dgen
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
