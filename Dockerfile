@@ -17,5 +17,6 @@ RUN cp src/model_generator.py /usr/bin/ && \
 RUN cp src/generate_3d_models.sh /usr/bin/ && \
     chmod +x /usr/bin/generate_3d_models.sh
 RUN rm -rf src
-
+RUN adduser modeler
+USER modeler
 ENTRYPOINT ["/usr/bin/generate_3d_models.sh"]
