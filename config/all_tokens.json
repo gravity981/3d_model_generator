@@ -1,10 +1,10 @@
 {
   "model": "token_3d.scad",
-  "keyring_hole": {
+  "global": {
     "hole_diameter": 3,
     "hole_border_distance": 2
   },
-  "tokens": [
+  "geometries": [
     {
       "token_diameter": 27.3,
       "token_height": 2.1,

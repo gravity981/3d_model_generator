@@ -1,5 +1,10 @@
 {
-  "tokens": [{
+  "model": "token_3d.scad",
+  "global": {
+    "hole_diameter": 4,
+    "hole_border_distance": 3
+  },
+  "geometries": [{
     "token_diameter": 27.3,
     "token_height": 2,
     "token_name": "token_2CHF"
@@ -15,9 +20,5 @@
     "z_rotation": 35,
     "decal_name": "star",
     "x_offset": -1
-  }],
-  "keyring_hole": {
-    "hole_diameter": 4,
-    "hole_border_distance": 3
-  }
+  }]
 }
