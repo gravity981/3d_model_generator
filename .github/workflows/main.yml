@@ -17,9 +17,7 @@ jobs:
           image: gravity981/3dgen:1.0
           options: -v ${{ github.workspace }}:/work
           run: |
-            openscad --version
-            xvfb-run -a ./scripts/generate_all_tokens.sh
-            ./scripts/stitch_thumbnails.sh
+            ./scripts/generate_all_tokens.sh
       
       - name: upload artifacts
         uses: actions/upload-artifact@v2
