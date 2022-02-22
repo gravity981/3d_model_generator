@@ -14,25 +14,38 @@ Tokens can be used for example in shopping trolleys.
 You can download the latest package with stl files from the release section. If you want to build the files on your own or want to modify something, please read on.
 
 
-# Prerequisites
-A Linux Docker environment is required to run the 3d model generator
-
-
 # Usage
-Clone this repository and run:
+As soon as you have installed docker on your system it's as simple as that:
+
+`docker run -v /path/to/dir:/work gravity981/3dgen`
+
+This will generate an example model into `/path/to/dir/`.
+
+Optional parameter can be used to customize the generator output
 ```
-sudo docker run -v /path/to/repo:/work gravity981/3dgen \
-  -m models \
-  -c config/example_token.json \
-  -o output/example_token \
-  --thumbnails \
-  --poster
+usage: 3dgen [-h] [-m MODEL_DIR] [-c CONF_FILE] [-o OUTPUT_DIR]
+             [-f OUTPUT_FORMAT] [-t] [-p]
+
+Generate 3D Tokens
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -m MODEL_DIR, --model-dir MODEL_DIR
+                        Path to models directory
+  -c CONF_FILE, --conf-file CONF_FILE
+                        Path to config file
+  -o OUTPUT_DIR, --output-dir OUTPUT_DIR
+                        Path to output directory
+  -f OUTPUT_FORMAT, --output-format OUTPUT_FORMAT
+                        Format of output files
+  -t, --thumbnails      Create thumbnails too
+  -p, --poster          Create poster with stitched thumbnails
 ```
 
 Have a look at [example_token.json](config/example_token.json) to see the possible parameters which can be configured. Change it according to your needs.
 
-The output of the generator is one or more stl files. In order to 3d-print the tokens the stl files have to be processed with a slicer.
-
 
 # Contribute
 If you want to add a token have a look at [all_tokens.json](config/all_tokens.json). Open a PR to extend this json file with the config you want to add.
+
+If you want to add another model. Open a PR with an additional scad file and an example config

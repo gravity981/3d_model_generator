@@ -1,4 +1,5 @@
 {
+  "name": "all_tokens",
   "model": "token_3d.scad",
   "global": {
     "hole_diameter": 4,
