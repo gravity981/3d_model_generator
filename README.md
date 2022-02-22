@@ -2,6 +2,7 @@
 This project is about generating parametric 3D models. The generated files can be processed with a slicer and then sent to a 3D printer. 
 
 ![latest version](https://img.shields.io/github/v/release/gravity981/3d_model_generator)
+![CI](https://github.com/gravity981/3d_model_generator/actions/workflows/continous_integration.yml/badge.svg)
 
 ## Tokens
 Tokens can be used for example in shopping trolleys.
