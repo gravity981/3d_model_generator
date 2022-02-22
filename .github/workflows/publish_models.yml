@@ -47,12 +47,17 @@ jobs:
           type: 'zip'
           filename: 'token_package.zip'
 
+      - name: get latest tag
+        uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
+
       - name: publish github release
         uses: ncipollo/release-action@v1
         with:
           artifacts: "token_package.zip,token_package/poster.png"
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: true
+          tag: ${{ steps.get-latest-tag.outputs.tag }}
           body: |
             based on config of revision ${{ github.sha }}
             ![poster](${{ github.server_url }}/${{ github.repository }}/releases/download/<EDIT_THIS>/poster.png)
