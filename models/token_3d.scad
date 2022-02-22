@@ -10,10 +10,10 @@ z_rotation=0;
 font="Marsh Stencil";
 manual_font_size_enabled=false;
 manual_font_size=10;
-font_size=manual_font_size_enabled ? manual_font_size : -0.0025*pow(token_diameter,2)+0.975*token_diameter-8.777;
+font_size=manual_font_size_enabled ? manual_font_size : -0.01*pow(token_diameter,2)+1.246*token_diameter-11.563;
 manual_y_offset_enabled=false;
 manual_y_offset=-2.8;
-y_offset=manual_y_offset_enabled ? manual_y_offset : 0.00077*pow(token_diameter,2)+0.027*token_diameter-3.318;
+y_offset=manual_y_offset_enabled ? manual_y_offset : 0.0*pow(token_diameter,2)+0.0*token_diameter-3.0;
 x_offset=0;
 
 difference() {
