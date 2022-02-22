@@ -22,11 +22,11 @@ Clone this repository and run:
 ```
 sudo docker run -v /path/to/git/repo:/work gravity981/3dgen
     -m models \
-    -c config/default_config.json \
+    -c config/example_token.json \
     -o output
 ```
 
-Have a look at [default_token.json](config/default_token.json) to see the possible parameters which can be configured. Change it according to your needs.
+Have a look at [example_token.json](config/example_token.json) to see the possible parameters which can be configured. Change it according to your needs.
 
 The output of the generator is one or more stl files. In order to 3d-print the tokens the stl files have to be processed with a slicer.
 

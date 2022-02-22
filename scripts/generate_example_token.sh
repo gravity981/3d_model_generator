@@ -2,5 +2,5 @@
 
 sudo docker run -v $PWD:/work gravity981/3dgen \
   -m models \
-  -c config/default_token.json \
-  -o output/default_token
+  -c config/example_token.json \
+  -o output/example_token
