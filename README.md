@@ -22,20 +22,26 @@ As soon as you have installed docker on your system it's as simple as that:
 `docker run -v /path/to/dir:/work gravity981/3dgen`
 
 Docker is going to fetch the image automatically from dockerhub if it is not already installed on your computer. 
-Then it is going tolaunch a container, generate an example model and save it to the directory `/path/to/dir/`.
+Then it is going to launch a container, generate an example model and save it to the directory `/path/to/dir/`.
 
 ## Example 2
 
 ```
 docker run -v $PWD:/work gravity981/3dgen \
-  -m models \
-  -c config/all_tokens.json \
-  -o output/all_tokens \
-  --thumbnails \
-  --poster
+  -c config/example_token.json \
+  -o output/example_token \
+  --thumbnails
 ```
-This will mount the current working directory (`$PWD`) to the docker container and use models & config from there.
-Generated files are saved to your current working directory in output/all_tokens.
+This will mount the current working directory (`$PWD`) to the docker container to make it work with input/output files from there.
+In this example the generated model file is saved to your current working directory under `output/example_token`.
+
+To customize a model, have a look at [example_token.json](config/example_token.json). 
+This file contains parameters which can be customized for the token model. 
+Create your own copy of this file and pass it with the `-c` argument to the generator. 
+Make sure it is located in the directory which is mounted to the docker container. 
+> :information_source: Customizable parameters are specific to the selected model.
+
+The options `--thumbnails` causes the generator to output an additionl picture (.png) of the model.
 
 
 ## Arguments
@@ -59,11 +65,6 @@ optional arguments:
   -t, --thumbnails      Create thumbnails too
   -p, --poster          Create poster with stitched thumbnails
 ```
-### Customization
-To customize the generated model, have a look at [example_token.json](config/example_token.json). 
-This file contains paramaters which can be customized for the token model. Create your own copy to use with the generator.
-> :information_source: Customizable parameters are specific to the selected model.
-
 
 # Contribute
 If you want to add a token have a look at [all_tokens.json](config/all_tokens.json). Open a PR to extend this json file with the config you want to add.
