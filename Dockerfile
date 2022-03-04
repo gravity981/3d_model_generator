@@ -18,10 +18,9 @@ COPY config /conf
 COPY src src
 RUN cp src/model_generator.py /usr/bin/ && \
     chmod +x /usr/bin/model_generator.py && \
-    ln -s /usr/bin/model_generator.py /usr/bin/3dgen && \
-    cp src/generate_3d_models.sh /usr/bin/ && \
-    chmod +x /usr/bin/generate_3d_models.sh && \
+    cp src/model_generator_wrapper.sh /usr/bin/ && \
+    chmod +x /usr/bin/model_generator_wrapper.sh && \
     rm -rf src
 RUN adduser modeler
 USER modeler
-ENTRYPOINT ["/usr/bin/generate_3d_models.sh"]
+ENTRYPOINT ["/usr/bin/model_generator_wrapper.sh"]
