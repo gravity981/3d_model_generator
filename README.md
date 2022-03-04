@@ -38,8 +38,8 @@ This will mount the current working directory (`$PWD`) to the docker container a
 Generated files are saved to your current working directory in output/all_tokens.
 
 
-## Parameters
-Optional parameters can be used to customize the generator output
+## Arguments
+Optional Arguments can be passed to get more control over the generator output
 ```
 usage: 3dgen [-h] [-m MODEL_DIR] [-c CONF_FILE] [-o OUTPUT_DIR]
              [-f OUTPUT_FORMAT] [-t] [-p]
@@ -59,10 +59,10 @@ optional arguments:
   -t, --thumbnails      Create thumbnails too
   -p, --poster          Create poster with stitched thumbnails
 ```
-
+### Customization
 To customize the generated model, have a look at [example_token.json](config/example_token.json). 
-There you can see possible parameters which can be configured. 
-> :information_source: Available parameters are specific to the selected model.
+This file contains paramaters which can be customized for the token model. Create your own copy to use with the generator.
+> :information_source: Customizable parameters are specific to the selected model.
 
 
 # Contribute
