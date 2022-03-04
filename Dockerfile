@@ -8,11 +8,12 @@ RUN apt-get update && apt-get install -y \
 
 # set up 3dgen
 WORKDIR /work
-COPY fonts fonts
+COPY res/fonts fonts
 RUN mkdir -p ~/.local/share/fonts && \
     cp fonts/*.*tf /usr/local/share/fonts && \
     fc-cache -f -v && \
     rm -rf fonts
+COPY res/meshes /meshes
 COPY models /models
 COPY config /conf
 COPY src src
