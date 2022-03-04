@@ -15,13 +15,31 @@ You can download the latest package with stl files from the release section. If 
 
 
 # Usage
+
+## Example 1
 As soon as you have installed docker on your system it's as simple as that:
 
 `docker run -v /path/to/dir:/work gravity981/3dgen`
 
-This will generate an example model into `/path/to/dir/`.
+Docker is going to fetch the image automatically from dockerhub if it is not already installed on your computer. 
+Then it is going tolaunch a container, generate an example model and save it to the directory `/path/to/dir/`.
 
-Optional parameter can be used to customize the generator output
+## Example 2
+
+```
+docker run -v $PWD:/work gravity981/3dgen \
+  -m models \
+  -c config/all_tokens.json \
+  -o output/all_tokens \
+  --thumbnails \
+  --poster
+```
+This will mount the current working directory (`$PWD`) to the docker container and use models & config from there.
+Generated files are saved to your current working directory in output/all_tokens.
+
+
+## Parameters
+Optional parameters can be used to customize the generator output
 ```
 usage: 3dgen [-h] [-m MODEL_DIR] [-c CONF_FILE] [-o OUTPUT_DIR]
              [-f OUTPUT_FORMAT] [-t] [-p]
@@ -42,7 +60,9 @@ optional arguments:
   -p, --poster          Create poster with stitched thumbnails
 ```
 
-Have a look at [example_token.json](config/example_token.json) to see the possible parameters which can be configured. Change it according to your needs.
+To customize the generated model, have a look at [example_token.json](config/example_token.json). 
+There you can see possible parameters which can be configured. 
+> :information_source: Available parameters are specific to the selected model.
 
 
 # Contribute
