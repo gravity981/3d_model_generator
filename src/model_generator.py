@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 
 import argparse
+import math
 import os.path
 import json
 import subprocess
+
+
+def next_perfect_square(n: int) -> int:
+    next_n = math.floor(math.sqrt(n)) + 1
+    return next_n * next_n
+
 
 default_model_dir = '/models'
 default_conf_file = '/conf/example_token.json'
@@ -86,8 +93,8 @@ with open(generated_config_filepath, 'w') as fp:
 scad_file = '{}/{}'.format(args.model_dir, config['model'])
 
 # create 3d files with openscad and previously generated parameter sets
+count = 0
 try:
-    count = 0
     for paramset in openscad_config['parameterSets'].keys():
         openscad_command = 'openscad -o {}/3d/{}.{} -p {} -P {} {}'\
             .format(args.output_dir, paramset, output_format, generated_config_filepath, paramset, scad_file)
@@ -107,8 +114,8 @@ except Exception as e:
     exit(1)
 
 # stitch thumbnails together to a poster
-columns = 11  # use some logic to determine a reasonable column count
 if args.thumbnails and args.poster:
+    columns = math.sqrt(next_perfect_square(count))
     command = 'montage -tile {}x0 -geometry +0+0 {}/thumbnail/*.png {}/poster.png'.format(columns, args.output_dir, args.output_dir)
     proc = subprocess.run(command.split(' '), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     proc.check_returncode()
