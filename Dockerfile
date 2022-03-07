@@ -17,8 +17,7 @@ COPY res/meshes /meshes
 COPY models /models
 COPY config /conf
 COPY src /usr/bin
-RUN chmod +x /usr/bin/model_generator.py && \
-    chmod +x /usr/bin/model_generator_wrapper.sh && \
+RUN chmod +x /usr/bin/model_generator_wrapper.sh && \
     rm -rf src
 RUN adduser modeler
 USER modeler

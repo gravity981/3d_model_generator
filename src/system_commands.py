@@ -1,8 +1,7 @@
 import subprocess
-import math
 
 
-class CommandExecutor:
+class SystemCommands:
 
     @staticmethod
     def generate_3d_model(output_dir: str, paramset: str, output_format: str, paramset_filepath: str,
@@ -31,11 +30,6 @@ class CommandExecutor:
             return False
         print('created \"{}/{}.png\"'.format(output_dir, paramset))
         return True
-
-    @staticmethod
-    def next_perfect_square(n: int) -> int:
-        next_n = math.floor(math.sqrt(n)) + 1
-        return next_n * next_n
 
     @staticmethod
     def generate_poster(columns: int, output_dir) -> bool:
