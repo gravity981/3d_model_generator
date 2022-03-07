@@ -7,6 +7,10 @@ import math
 from system_commands import SystemCommands
 
 
+class Config:
+    pass
+
+
 def next_perfect_square(n: int) -> int:
     if n < 0:
         return math.nan
@@ -14,11 +18,70 @@ def next_perfect_square(n: int) -> int:
     return next_n * next_n
 
 
-def main():
+def init_generator(args) -> Config:
     default_model_dir = '/models'
     default_conf_file = '/conf/example_token.json'
     default_output_dir = '/work/output/{name}'
     default_output_format = 'stl'
+    config = Config()
+    config.model_dir = args.model_dir
+    if config.model_dir is None:
+        config.model_dir = default_model_dir
+    elif not os.path.isdir(config.model_dir):
+        print('model directory not found')
+        raise NotADirectoryError(config.model_dir)
+
+    if args.conf_file is None:
+        args.conf_file = default_conf_file
+    elif not os.path.isfile(args.conf_file):
+        print('conf file not found')
+        raise FileNotFoundError(args.conf_file)
+    with open(args.conf_file) as json_file:
+        config.data = json.load(json_file)
+
+    config.output_dir = args.output_dir
+    if config.output_dir is None:
+        config.output_dir = default_output_dir.format(name=config.data['name'])
+    else:
+        config.output_dir = config.output_dir.strip('/')
+
+    os.makedirs(config.output_dir, exist_ok=False)
+
+    if args.output_format is None:
+        config.output_format = default_output_format
+    else:
+        config.output_format = args.output_format
+
+    config.thumbnails = args.thumbnails
+    config.poster = args.poster
+    return config
+
+
+def generate_openscad_parametersets(config: Config) -> dict:
+    openscad_config = dict()
+    openscad_config['fileFormatVersion'] = '1'
+    openscad_config['parameterSets'] = dict()
+    for geometry in config.data['geometries']:
+        for decal in config.data['decals']:
+            if 'decal_name' in decal.keys():
+                decal_text = decal['decal_name']
+            else:
+                decal_text = decal['decal_text']
+            parameterset_name = '{}_{}'.format(geometry['token_name'], decal_text)
+            openscad_config['parameterSets'][parameterset_name] = dict()
+            # append global config to paramset
+            for k, v in config.data['global'].items():
+                openscad_config['parameterSets'][parameterset_name][k] = v
+            # append geometry config to paramset
+            for k, v in geometry.items():
+                openscad_config['parameterSets'][parameterset_name][k] = v
+            # append decal config to paramset
+            for k, v in decal.items():
+                openscad_config['parameterSets'][parameterset_name][k] = v
+    return openscad_config
+
+
+def main():
 
     # read command arguments
     parser = argparse.ArgumentParser(prog='3dgen', description='Generate 3D Tokens')
@@ -30,87 +93,42 @@ def main():
     parser.add_argument('-p', '--poster', action='store_true', required=False, help='Create poster with stitched thumbnails')
     args = parser.parse_args()
 
-    if args.model_dir is None:
-        args.model_dir = default_model_dir
-    elif not os.path.isdir(args.model_dir):
-        print('model directory not found')
-        exit(1)
-
-    if args.conf_file is None:
-        args.conf_file = default_conf_file
-    elif not os.path.isfile(args.conf_file):
-        print('conf file not found')
-        exit(1)
     try:
-        with open(args.conf_file) as json_file:
-            config = json.load(json_file)
+        config = init_generator(args)
     except Exception as e:
-        print('error reading file \"{}\": {}'.format(args.conf_file, e))
-        exit(1)
+        print('error while initialising generator: {}'.format(e))
+        return False
 
-    if args.output_dir is None:
-        args.output_dir = default_output_dir.format(name=config['name'])
-    else:
-        args.output_dir = args.output_dir.strip('/')
-    try:
-        os.makedirs(args.output_dir, exist_ok=False)
-    except FileExistsError as e:
-        print('error creating output directory \"{}\": {}'.format(args.output_dir, e))
-        exit(1)
+    openscad_config = generate_openscad_parametersets(config)
 
-    if args.output_format is None:
-        output_format = default_output_format
-    else:
-        output_format = args.output_format
+    os.makedirs('{}/intermediate'.format(config.output_dir), exist_ok=True)
+    os.makedirs('{}/3d'.format(config.output_dir), exist_ok=True)
+    if config.thumbnails:
+        os.makedirs('{}/thumbnail'.format(config.output_dir), exist_ok=True)
 
-    # generate openSCAD parameter sets
-    openscad_config = dict()
-    openscad_config['fileFormatVersion'] = '1'
-    openscad_config['parameterSets'] = dict()
-    for geometry in config['geometries']:
-        for decal in config['decals']:
-            if 'decal_name' in decal.keys():
-                decal_text = decal['decal_name']
-            else:
-                decal_text = decal['decal_text']
-            parameterset_name = '{}_{}'.format(geometry['token_name'], decal_text)
-            openscad_config['parameterSets'][parameterset_name] = dict()
-            # append global config to paramset
-            for k, v in config['global'].items():
-                openscad_config['parameterSets'][parameterset_name][k] = v
-            # append geometry config to paramset
-            for k, v in geometry.items():
-                openscad_config['parameterSets'][parameterset_name][k] = v
-            # append decal config to paramset
-            for k, v in decal.items():
-                openscad_config['parameterSets'][parameterset_name][k] = v
-
-    os.makedirs('{}/intermediate'.format(args.output_dir), exist_ok=True)
-    os.makedirs('{}/3d'.format(args.output_dir), exist_ok=True)
-    if args.thumbnails:
-        os.makedirs('{}/thumbnail'.format(args.output_dir), exist_ok=True)
-
-    generated_config_filepath = '{}/intermediate/openscad.json'.format(args.output_dir)
+    generated_config_filepath = '{}/intermediate/openscad.json'.format(config.output_dir)
     with open(generated_config_filepath, 'w') as fp:
         json.dump(openscad_config, fp, indent=2)
-    scad_file = '{}/{}'.format(args.model_dir, config['model'])
+    scad_file = '{}/{}'.format(config.model_dir, config.data['model'])
 
     # create 3d files with openscad and previously generated parameter sets
     count = 0
     for paramset in openscad_config['parameterSets'].keys():
-        if not SystemCommands.generate_3d_model(args.output_dir, paramset, output_format, generated_config_filepath, scad_file):
+        if not SystemCommands.generate_3d_model(config.output_dir, paramset, config.output_format, generated_config_filepath, scad_file):
             exit(1)
-        if args.thumbnails:
-            if not SystemCommands.generate_thumbnail(args.output_dir, paramset, generated_config_filepath, scad_file):
+        if config.thumbnails:
+            if not SystemCommands.generate_thumbnail(config.output_dir, paramset, generated_config_filepath, scad_file):
                 exit(1)
         count += 1
     print('created {} file(s)'.format(count))
 
     # stitch thumbnails together to a poster
-    if args.thumbnails and args.poster:
-        columns = next_perfect_square(count)
-        SystemCommands.generate_poster(columns, args.output_dir)
+    if config.thumbnails and config.poster:
+        columns = math.sqrt(next_perfect_square(count))
+        SystemCommands.generate_poster(columns, config.output_dir)
 
 
 if __name__ == '__main__':
-    main()
+    if not main():
+        exit(1)
+    exit(0)

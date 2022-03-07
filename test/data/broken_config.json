@@ -1,0 +1,25 @@
+{
+  "model": "token_3d.scad",
+  "global": {
+    "hole_diameter": 4,
+    "hole_border_distance": 3
+  },
+  "geometries": [{
+    "token_diameter": 27.3,
+    "token_height": 2,
+    "token_name": "token_2CHF"
+  }],
+  "decals": [{
+    "decal_enabled": true,
+    "decal_text": "★",
+    "font": "Segoe Ui Symbol",
+    "manual_font_size_enabled": false,
+    "manual_font_size": 10,
+    "manual_y_offset_enabled": true,
+    "manual_y_offset": -1,
+    "z_rotation": 36,
+    "decal_name": "star",
+    "x_offset": -0.7,
+    "font_size_multiplier": 1.25
+  }]
+}
