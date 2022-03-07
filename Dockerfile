@@ -16,10 +16,8 @@ RUN mkdir -p ~/.local/share/fonts && \
 COPY res/meshes /meshes
 COPY models /models
 COPY config /conf
-COPY src src
-RUN cp src/model_generator.py /usr/bin/ && \
-    chmod +x /usr/bin/model_generator.py && \
-    cp src/model_generator_wrapper.sh /usr/bin/ && \
+COPY src /usr/bin
+RUN chmod +x /usr/bin/model_generator.py && \
     chmod +x /usr/bin/model_generator_wrapper.sh && \
     rm -rf src
 RUN adduser modeler

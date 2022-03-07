@@ -1,16 +1,10 @@
 #!/usr/bin/env python3
 
 import argparse
-import math
 import os.path
 import json
-import subprocess
 
-
-def next_perfect_square(n: int) -> int:
-    next_n = math.floor(math.sqrt(n)) + 1
-    return next_n * next_n
-
+from command_executor import CommandExecutor
 
 default_model_dir = '/models'
 default_conf_file = '/conf/example_token.json'
@@ -94,29 +88,16 @@ scad_file = '{}/{}'.format(args.model_dir, config['model'])
 
 # create 3d files with openscad and previously generated parameter sets
 count = 0
-try:
-    for paramset in openscad_config['parameterSets'].keys():
-        openscad_command = 'openscad -o {}/3d/{}.{} -p {} -P {} {}'\
-            .format(args.output_dir, paramset, output_format, generated_config_filepath, paramset, scad_file)
-        proc = subprocess.run(openscad_command.split(' '), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        proc.check_returncode()
-        print('created \"{}/{}.{}\"'.format(args.output_dir, paramset, output_format))
-        if args.thumbnails:
-            openscad_command = 'openscad -o {}/thumbnail/{}.png -p {} -P {} --imgsize=192,192 {}'\
-                .format(args.output_dir, paramset, generated_config_filepath, paramset, scad_file)
-            proc = subprocess.run(openscad_command.split(' '), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            proc.check_returncode()
-            print('created \"{}/{}.png\"'.format(args.output_dir, paramset))
-        count += 1
-    print('created {} 3d file(s)'.format(count))
-except Exception as e:
-    print('error executing command: {}'.format(e))
-    exit(1)
+for paramset in openscad_config['parameterSets'].keys():
+    if not CommandExecutor.generate_3d_model(args.output_dir, paramset, output_format, generated_config_filepath, scad_file):
+        exit(1)
+    if args.thumbnails:
+        if not CommandExecutor.generate_thumbnail(args.output_dir, paramset, generated_config_filepath, scad_file):
+            exit(1)
+    count += 1
+print('created {} file(s)'.format(count))
 
 # stitch thumbnails together to a poster
 if args.thumbnails and args.poster:
-    columns = math.sqrt(next_perfect_square(count))
-    command = 'montage -tile {}x0 -geometry +0+0 {}/thumbnail/*.png {}/poster.png'.format(columns, args.output_dir, args.output_dir)
-    proc = subprocess.run(command.split(' '), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    proc.check_returncode()
-    print('created \"{}/poster.png\"'.format(args.output_dir))
+    columns = CommandExecutor.next_perfect_square(count)
+    CommandExecutor.generate_poster(columns, args.output_dir)
