@@ -39,6 +39,7 @@ class TestModelGenerator(unittest.TestCase):
         args.output_dir = None
         self.assertRaises(KeyError, modgen.init_generator, args)
 
+    @unittest.skip('unreliable, existing output_dir path')
     def test_init_generator_output_dir_exists(self):
         args = Args()
         args.model_dir = None
