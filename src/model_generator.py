@@ -42,8 +42,8 @@ def init_generator(args) -> Config:
     config.output_dir = args.output_dir
     if config.output_dir is None:
         config.output_dir = default_output_dir.format(name=config.data['name'])
-    else:
-        config.output_dir = config.output_dir.strip('/')
+    #else:
+    #    config.output_dir = config.output_dir.strip('/')
 
     os.makedirs(config.output_dir, exist_ok=False)
 

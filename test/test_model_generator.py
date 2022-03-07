@@ -39,7 +39,6 @@ class TestModelGenerator(unittest.TestCase):
         args.output_dir = None
         self.assertRaises(KeyError, modgen.init_generator, args)
 
-    @unittest.skip('unreliable, existing output_dir path')
     def test_init_generator_output_dir_exists(self):
         args = Args()
         args.model_dir = None
@@ -55,7 +54,8 @@ class TestModelGenerator(unittest.TestCase):
         args.output_format = None
         args.thumbnails = None
         args.poster = None
-        self.assertRaises(FileExistsError, modgen.init_generator, args)
+        print(get_test_suite_dir())
+        config = modgen.init_generator(args)
 
     def test_generate_openscad_parametersets_empty_config(self):
         config = modgen.Config()
@@ -64,6 +64,10 @@ class TestModelGenerator(unittest.TestCase):
         parametersets = modgen.generate_openscad_parametersets(config)
         self.assertIn('fileFormatVersion', parametersets)
         self.assertIn('parameterSets', parametersets)
+
+    @classmethod
+    def tearDownClass(cls):
+        os.removedirs(os.path.join(get_test_suite_dir(), 'out'))
 
 
 if __name__ == '__main__':
