@@ -56,6 +56,12 @@ class TestModelGenerator(unittest.TestCase):
         args.poster = None
         print(get_test_suite_dir())
         config = modgen.init_generator(args)
+        self.assertIsInstance(config.model_dir, str)
+        self.assertIsInstance(config.output_dir, str)
+        self.assertIsInstance(config.data, dict)
+        self.assertIsInstance(config.output_format, str)
+        self.assertIsNone(config.thumbnails)
+        self.assertIsNone(config.poster)
 
     def test_generate_openscad_parametersets_empty_config(self):
         config = modgen.Config()
