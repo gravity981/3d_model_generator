@@ -1,3 +1,4 @@
+import random
 import unittest
 from src import model_generator as modgen
 import math
@@ -70,6 +71,43 @@ class TestModelGenerator(unittest.TestCase):
         parametersets = modgen.generate_openscad_parametersets(config)
         self.assertIn('fileFormatVersion', parametersets)
         self.assertIn('parameterSets', parametersets)
+        self.assertEqual(len(parametersets['parameterSets']), 0)
+
+    def test_generate_openscad_parametersets_example_config(self):
+        config = modgen.Config()
+        config.data = dict()
+        config.data['global'] = dict()
+        config.data['global']['diameter'] = 5
+        config.data['geometries'] = list()
+        config.data['geometries'].append({'height': 4})
+        config.data['geometries'].append({'height': 3})
+        config.data['decals'] = list()
+        config.data['decals'].append({'text': 'hello'})
+        config.data['decals'].append({'text': 'world'})
+        random.seed(123)
+        parametersets = modgen.generate_openscad_parametersets(config=config)
+        print(parametersets)
+        self.assertEqual(len(parametersets['parameterSets']), 4)
+        self.assertIn('TL4FMM_BDOD6B', parametersets['parameterSets'])
+        self.assertEqual(parametersets['parameterSets']['TL4FMM_BDOD6B']['diameter'], 5)
+        self.assertEqual(parametersets['parameterSets']['TL4FMM_BDOD6B']['height'], 4)
+        self.assertEqual(parametersets['parameterSets']['TL4FMM_BDOD6B']['text'], 'hello')
+        self.assertNotIn('name', parametersets['parameterSets']['TL4FMM_BDOD6B'])
+        self.assertIn('TL4FMM_IAPDVC', parametersets['parameterSets'])
+        self.assertEqual(parametersets['parameterSets']['TL4FMM_IAPDVC']['diameter'], 5)
+        self.assertEqual(parametersets['parameterSets']['TL4FMM_IAPDVC']['height'], 4)
+        self.assertEqual(parametersets['parameterSets']['TL4FMM_IAPDVC']['text'], 'world')
+        self.assertNotIn('name', parametersets['parameterSets']['TL4FMM_IAPDVC'])
+        self.assertIn('LQ6DF2_BDOD6B', parametersets['parameterSets'])
+        self.assertEqual(parametersets['parameterSets']['LQ6DF2_BDOD6B']['diameter'], 5)
+        self.assertEqual(parametersets['parameterSets']['LQ6DF2_BDOD6B']['height'], 3)
+        self.assertEqual(parametersets['parameterSets']['LQ6DF2_BDOD6B']['text'], 'hello')
+        self.assertNotIn('name', parametersets['parameterSets']['LQ6DF2_BDOD6B'])
+        self.assertIn('LQ6DF2_IAPDVC', parametersets['parameterSets'])
+        self.assertEqual(parametersets['parameterSets']['LQ6DF2_IAPDVC']['diameter'], 5)
+        self.assertEqual(parametersets['parameterSets']['LQ6DF2_IAPDVC']['height'], 3)
+        self.assertEqual(parametersets['parameterSets']['LQ6DF2_IAPDVC']['text'], 'world')
+        self.assertNotIn('name', parametersets['parameterSets']['LQ6DF2_IAPDVC'])
 
     @classmethod
     def tearDownClass(cls):

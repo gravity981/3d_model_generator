@@ -9,17 +9,17 @@
     {
       "token_diameter": 27.3,
       "token_height": 2.1,
-      "token_name": "token_2CHF"
+      "name": "token_2CHF"
     },
     {
       "token_diameter": 23.1,
       "token_height": 1.6,
-      "token_name": "token_1CHF"
+      "name": "token_1CHF"
     },
     {
       "token_diameter": 23.2,
       "token_height": 2.3,
-      "token_name": "token_1EUR"
+      "name": "token_1EUR"
     }
   ],
   "decals": [
@@ -133,40 +133,40 @@
     },
     {
       "decal_text": "€",
-      "decal_name": "euro",
+      "name": "euro",
       "x_offset": -1
     },
     {
       "decal_text": "$",
-      "decal_name": "dollar"
+      "name": "dollar"
     },
     {
       "decal_text": "£",
-      "decal_name": "pound"
+      "name": "pound"
     },
     {
       "decal_text": "♥",
-      "decal_name": "heart",
+      "name": "heart",
       "font": "Segoe Ui Symbol"
     },
     {
       "decal_text": "♦",
-      "decal_name": "diamond",
+      "name": "diamond",
       "font": "Segoe Ui Symbol"
     },
     {
       "decal_text": "♣",
-      "decal_name": "clover",
+      "name": "clover",
       "font": "Segoe Ui Symbol"
     },
     {
       "decal_text": "♠",
-      "decal_name": "spades",
+      "name": "spades",
       "font": "Segoe Ui Symbol"
     },
     {
       "decal_text": "★",
-      "decal_name": "star",
+      "name": "star",
       "font": "Segoe Ui Symbol",
       "z_rotation": 36,
       "x_offset": -0.7,
