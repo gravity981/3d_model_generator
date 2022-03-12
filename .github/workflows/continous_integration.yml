@@ -58,3 +58,16 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  integration_tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: [ push_to_registry ]
+    steps:
+      - name: generate test models
+        uses: addnab/docker-run-action@v3
+        with:
+          registry: docker.io
+          image: gravity981/3dgen:main
+          options: -v ${{ github.workspace }}:/work --user root
+          run: ./test/integration_tests.sh
