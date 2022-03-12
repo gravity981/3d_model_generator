@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import itertools
 import os.path
 import json
 import math
@@ -48,8 +49,6 @@ def init_generator(args) -> Config:
     config.output_dir = args.output_dir
     if config.output_dir is None:
         config.output_dir = default_output_dir.format(name=config.data['name'])
-    # else:
-    #    config.output_dir = config.output_dir.strip('/')
 
     os.makedirs(config.output_dir, exist_ok=False)
 
@@ -63,39 +62,35 @@ def init_generator(args) -> Config:
     return config
 
 
+def generate_layer_names_if_not_exist(config: Config):
+    for layer in config.data['layers']:
+        for layer_conf in layer:
+            if 'name' not in layer_conf.keys():
+                if 'decal_text' in layer_conf.keys():
+                    layer_conf['name'] = layer_conf['decal_text']
+                else:
+                    layer_conf['name'] = id_generator()
+
+
 def generate_openscad_parametersets(config: Config) -> dict:
-    openscad_config = dict()
-    openscad_config['fileFormatVersion'] = '1'
-    openscad_config['parameterSets'] = dict()
-    for geometry in config.data['geometries']:
-        for decal in config.data['decals']:
-            if 'name' in decal.keys():
-                decal_text = decal['name']
-            elif 'decal_text' in decal.keys():
-                decal_text = decal['decal_text']
-                decal['name'] = decal_text
-            else:
-                decal_text = id_generator()
-                decal['name'] = decal_text
-            if 'name' in geometry.keys():
-                geometry_name = geometry['name']
-            else:
-                geometry_name = id_generator()
-                geometry['name'] = geometry_name
-            parameterset_name = '{}_{}'.format(geometry_name, decal_text)
-            openscad_config['parameterSets'][parameterset_name] = dict()
-            # append global config to paramset
-            for k, v in config.data['global'].items():
-                openscad_config['parameterSets'][parameterset_name][k] = v
-            # append geometry config to paramset
-            for k, v in geometry.items():
-                if k != 'name':
-                    openscad_config['parameterSets'][parameterset_name][k] = v
-            # append decal config to paramset
-            for k, v in decal.items():
-                if k != 'name':
-                    openscad_config['parameterSets'][parameterset_name][k] = v
-    return openscad_config
+    generate_layer_names_if_not_exist(config)
+    parametersets = dict()
+    parametersets['fileFormatVersion'] = '1'
+    parametersets['parameterSets'] = dict()
+    combinations = list(itertools.product(*config.data['layers']))
+    for tup in combinations:
+        if not tup:
+            break
+        tup_name = ''
+        paramset = dict()
+        for dic in tup:
+            tup_name += dic['name'] + "_"
+            paramset.update(dic)
+            paramset.update(config.data['global'])
+            paramset.pop('name', None)
+        tup_name = tup_name.rstrip('_')
+        parametersets['parameterSets'][tup_name] = paramset
+    return parametersets
 
 
 def main():

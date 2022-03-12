@@ -5,174 +5,176 @@
     "hole_diameter": 4,
     "hole_border_distance": 2
   },
-  "geometries": [
-    {
-      "token_diameter": 27.3,
-      "token_height": 2.1,
-      "name": "token_2CHF"
-    },
-    {
-      "token_diameter": 23.1,
-      "token_height": 1.6,
-      "name": "token_1CHF"
-    },
-    {
-      "token_diameter": 23.2,
-      "token_height": 2.3,
-      "name": "token_1EUR"
-    }
-  ],
-  "decals": [
-    {
-      "decal_text": "A"
-    },
-    {
-      "decal_text": "B"
-    },
-    {
-      "decal_text": "C"
-    },
-    {
-      "decal_text": "D"
-    },
-    {
-      "decal_text": "E"
-    },
-    {
-      "decal_text": "F"
-    },
-    {
-      "decal_text": "G"
-    },
-    {
-      "decal_text": "H"
-    },
-    {
-      "decal_text": "I"
-    },
-    {
-      "decal_text": "J"
-    },
-    {
-      "decal_text": "K"
-    },
-    {
-      "decal_text": "L"
-    },
-    {
-      "decal_text": "M"
-    },
-    {
-      "decal_text": "N"
-    },
-    {
-      "decal_text": "O"
-    },
-    {
-      "decal_text": "P"
-    },
-    {
-      "decal_text": "Q"
-    },
-    {
-      "decal_text": "R"
-    },
-    {
-      "decal_text": "S"
-    },
-    {
-      "decal_text": "T"
-    },
-    {
-      "decal_text": "U"
-    },
-    {
-      "decal_text": "V"
-    },
-    {
-      "decal_text": "W"
-    },
-    {
-      "decal_text": "X"
-    },
-    {
-      "decal_text": "Y"
-    },
-    {
-      "decal_text": "Z"
-    },
-    {
-      "decal_text": "0"
-    },
-    {
-      "decal_text": "1"
-    },
-    {
-      "decal_text": "2"
-    },
-    {
-      "decal_text": "3"
-    },
-    {
-      "decal_text": "4"
-    },
-    {
-      "decal_text": "5"
-    },
-    {
-      "decal_text": "6"
-    },
-    {
-      "decal_text": "7"
-    },
-    {
-      "decal_text": "8"
-    },
-    {
-      "decal_text": "9"
-    },
-    {
-      "decal_text": "€",
-      "name": "euro",
-      "x_offset": -1
-    },
-    {
-      "decal_text": "$",
-      "name": "dollar"
-    },
-    {
-      "decal_text": "£",
-      "name": "pound"
-    },
-    {
-      "decal_text": "♥",
-      "name": "heart",
-      "font": "Segoe Ui Symbol"
-    },
-    {
-      "decal_text": "♦",
-      "name": "diamond",
-      "font": "Segoe Ui Symbol"
-    },
-    {
-      "decal_text": "♣",
-      "name": "clover",
-      "font": "Segoe Ui Symbol"
-    },
-    {
-      "decal_text": "♠",
-      "name": "spades",
-      "font": "Segoe Ui Symbol"
-    },
-    {
-      "decal_text": "★",
-      "name": "star",
-      "font": "Segoe Ui Symbol",
-      "z_rotation": 36,
-      "x_offset": -0.7,
-      "manual_y_offset_enabled": true,
-      "manual_y_offset": -1,
-      "font_size_multiplier": 1.25
-    }
+  "layers": [
+    [
+      {
+        "token_diameter": 27.3,
+        "token_height": 2.1,
+        "name": "token_2CHF"
+      },
+      {
+        "token_diameter": 23.1,
+        "token_height": 1.6,
+        "name": "token_1CHF"
+      },
+      {
+        "token_diameter": 23.2,
+        "token_height": 2.3,
+        "name": "token_1EUR"
+      }
+    ],
+    [
+      {
+        "decal_text": "A"
+      },
+      {
+        "decal_text": "B"
+      },
+      {
+        "decal_text": "C"
+      },
+      {
+        "decal_text": "D"
+      },
+      {
+        "decal_text": "E"
+      },
+      {
+        "decal_text": "F"
+      },
+      {
+        "decal_text": "G"
+      },
+      {
+        "decal_text": "H"
+      },
+      {
+        "decal_text": "I"
+      },
+      {
+        "decal_text": "J"
+      },
+      {
+        "decal_text": "K"
+      },
+      {
+        "decal_text": "L"
+      },
+      {
+        "decal_text": "M"
+      },
+      {
+        "decal_text": "N"
+      },
+      {
+        "decal_text": "O"
+      },
+      {
+        "decal_text": "P"
+      },
+      {
+        "decal_text": "Q"
+      },
+      {
+        "decal_text": "R"
+      },
+      {
+        "decal_text": "S"
+      },
+      {
+        "decal_text": "T"
+      },
+      {
+        "decal_text": "U"
+      },
+      {
+        "decal_text": "V"
+      },
+      {
+        "decal_text": "W"
+      },
+      {
+        "decal_text": "X"
+      },
+      {
+        "decal_text": "Y"
+      },
+      {
+        "decal_text": "Z"
+      },
+      {
+        "decal_text": "0"
+      },
+      {
+        "decal_text": "1"
+      },
+      {
+        "decal_text": "2"
+      },
+      {
+        "decal_text": "3"
+      },
+      {
+        "decal_text": "4"
+      },
+      {
+        "decal_text": "5"
+      },
+      {
+        "decal_text": "6"
+      },
+      {
+        "decal_text": "7"
+      },
+      {
+        "decal_text": "8"
+      },
+      {
+        "decal_text": "9"
+      },
+      {
+        "decal_text": "€",
+        "name": "euro",
+        "x_offset": -1
+      },
+      {
+        "decal_text": "$",
+        "name": "dollar"
+      },
+      {
+        "decal_text": "£",
+        "name": "pound"
+      },
+      {
+        "decal_text": "♥",
+        "name": "heart",
+        "font": "Segoe Ui Symbol"
+      },
+      {
+        "decal_text": "♦",
+        "name": "diamond",
+        "font": "Segoe Ui Symbol"
+      },
+      {
+        "decal_text": "♣",
+        "name": "clover",
+        "font": "Segoe Ui Symbol"
+      },
+      {
+        "decal_text": "♠",
+        "name": "spades",
+        "font": "Segoe Ui Symbol"
+      },
+      {
+        "decal_text": "★",
+        "name": "star",
+        "font": "Segoe Ui Symbol",
+        "z_rotation": 36,
+        "x_offset": -0.7,
+        "manual_y_offset_enabled": true,
+        "manual_y_offset": -1,
+        "font_size_multiplier": 1.25
+      }
+    ]
   ]
 }
