@@ -1,4 +1,5 @@
 import itertools
+import json
 import random
 import unittest
 from src import model_generator as modgen
@@ -105,6 +106,21 @@ class TestModelGenerator(unittest.TestCase):
         self.assertEqual(parametersets['parameterSets']['TL4FMM_world']['height'], 3)
         self.assertEqual(parametersets['parameterSets']['TL4FMM_world']['decal_text'], 'world')
         self.assertNotIn('name', parametersets['parameterSets']['TL4FMM_world'])
+
+    def test_generate_output_files_from_example_config(self):
+        openscad_test_filepath = os.path.join(get_test_suite_dir(), 'data/well_formed_openscad.json')
+        with open(openscad_test_filepath) as json_file:
+            parametersets = json.load(json_file)
+        config = modgen.Config()
+        config.model_dir = '/models'
+        config.data = dict()
+        config.data['model'] = 'test.scad'
+        config.output_dir = '/out'
+        config.output_format = 'stl'
+        config.thumbnails = True
+        count, success = modgen.generate_output_files(config, parametersets['parameterSets'], openscad_test_filepath, True)
+        self.assertTrue(success)
+        self.assertEqual(count, 4)
 
     @classmethod
     def tearDownClass(cls):

@@ -93,6 +93,31 @@ def generate_openscad_parametersets(config: Config) -> dict:
     return parametersets
 
 
+def write_intermediate_files(output_dir: str, openscad_config: dict) -> str:
+    os.makedirs('{}/intermediate'.format(output_dir), exist_ok=True)
+    generated_config_filepath = '{}/intermediate/openscad.json'.format(output_dir)
+    with open(generated_config_filepath, 'w') as fp:
+        json.dump(openscad_config, fp, indent=2)
+    return generated_config_filepath
+
+
+def generate_output_files(config: Config, parametersets, parametersets_filepath, dry_run: bool = False) \
+        -> (int, bool):
+    scad_file = '{}/{}'.format(config.model_dir, config.data['model'])
+    count = 0
+    for paramset in parametersets.keys():
+        if not SystemCommands.generate_3d_model(config.output_dir, paramset, config.output_format,
+                                                parametersets_filepath, scad_file, dry_run):
+            return 0, False
+        if config.thumbnails:
+            if not SystemCommands.generate_thumbnail(config.output_dir, paramset, parametersets_filepath,
+                                                     scad_file, dry_run):
+                return 0, False
+        count += 1
+    print('created {} 3d file(s)'.format(count))
+    return count, True
+
+
 def main():
     # read command arguments
     parser = argparse.ArgumentParser(prog='3dgen', description='Generate 3D Tokens')
@@ -112,33 +137,20 @@ def main():
         return False
 
     openscad_config = generate_openscad_parametersets(config)
-
-    os.makedirs('{}/intermediate'.format(config.output_dir), exist_ok=True)
-    os.makedirs('{}/3d'.format(config.output_dir), exist_ok=True)
-    if config.thumbnails:
-        os.makedirs('{}/thumbnail'.format(config.output_dir), exist_ok=True)
-
-    generated_config_filepath = '{}/intermediate/openscad.json'.format(config.output_dir)
-    with open(generated_config_filepath, 'w') as fp:
-        json.dump(openscad_config, fp, indent=2)
-    scad_file = '{}/{}'.format(config.model_dir, config.data['model'])
+    parametersets_filepath = write_intermediate_files(config.output_dir, openscad_config)
 
     # create 3d files with openscad and previously generated parameter sets
-    count = 0
-    for paramset in openscad_config['parameterSets'].keys():
-        if not SystemCommands.generate_3d_model(config.output_dir, paramset, config.output_format,
-                                                generated_config_filepath, scad_file):
-            exit(1)
-        if config.thumbnails:
-            if not SystemCommands.generate_thumbnail(config.output_dir, paramset, generated_config_filepath, scad_file):
-                exit(1)
-        count += 1
-    print('created {} file(s)'.format(count))
+    count, success = generate_output_files(config, openscad_config['parameterSets'],
+                                           parametersets_filepath)
+    if not success:
+        return False
 
     # stitch thumbnails together to a poster
     if config.thumbnails and config.poster:
         columns = math.sqrt(next_perfect_square(count))
-        SystemCommands.generate_poster(columns, config.output_dir)
+        if not SystemCommands.generate_poster(columns, config.output_dir):
+            return False
+
     return True
 
 

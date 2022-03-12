@@ -1,0 +1,25 @@
+{
+  "fileFormatVersion": "1",
+  "parameterSets": {
+    "BDOD6B_IAPDVC": {
+      "height": 4,
+      "diameter": 5,
+      "text": "hello"
+    },
+    "BDOD6B_world": {
+      "height": 4,
+      "diameter": 5,
+      "decal_text": "world"
+    },
+    "TL4FMM_IAPDVC": {
+      "height": 3,
+      "diameter": 5,
+      "text": "hello"
+    },
+    "TL4FMM_world": {
+      "height": 3,
+      "diameter": 5,
+      "decal_text": "world"
+    }
+  }
+}
