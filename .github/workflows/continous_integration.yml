@@ -64,7 +64,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ push_to_registry ]
     steps:
-      - name: generate test models
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Run integration tests
         uses: addnab/docker-run-action@v3
         with:
           registry: docker.io
