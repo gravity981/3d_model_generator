@@ -1,0 +1,17 @@
+{
+  "name": "example_smartphone_case",
+  "model": "smartphone_case.scad",
+  "layers": [
+    [
+      {
+        "font": "Marsh Stencil",
+        "baseModelFilePath": "/meshes/case_samsung_S20_tpu v8.3mf",
+        "name": "case_samsung_s20",
+        "decal_text": "Hello World",
+        "horizontal_offset": 95,
+        "vertical_offset": 35,
+        "font_size": 10
+      }
+    ]
+  ]
+}

@@ -86,7 +86,8 @@ def generate_openscad_parametersets(config: Config) -> dict:
         for dic in tup:
             tup_name += dic['name'] + "_"
             paramset.update(dic)
-            paramset.update(config.data['global'])
+            if 'global' in config.data.keys():
+                paramset.update(config.data['global'])
             paramset.pop('name', None)
         tup_name = tup_name.rstrip('_')
         parametersets['parameterSets'][tup_name] = paramset
