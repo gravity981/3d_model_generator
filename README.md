@@ -1,27 +1,48 @@
 # 3D Model Generator
-This project is about generating parametric 3D models. The generated files can be processed with a slicer and then sent to a 3D printer. 
+This project is about generating customized models for 3D printing. 
+The *3D Model Generator* is based on [docker](https://www.docker.com/), [OpenSCAD](https://openscad.org/) 
+and [python](https://www.python.org/). 
+The built-in, parametric 3D models can easily be customized via json.
+
+Head over to the release section to download pre-generated models. 
+Read on if you want to create your own customized models.
 
 ![CI](https://github.com/gravity981/3d_model_generator/actions/workflows/continous_integration.yml/badge.svg)
 
-
-## Tokens
-Tokens can be used for example in shopping trolleys.
-
-<img src="example.png" alt="example token" width="200"/>
-
-
 ## Model Package Releases
+You can download the latest package  from the github release section. 
+The package contains CAD model files which have to be processed with a slicer before 3D printing.
+
 ![latest version](https://img.shields.io/github/v/release/gravity981/3d_model_generator)
 
-You can download the latest package with stl files from the github release section. If you want to build the files on your own or want to modify something, please read on.
+# Built-In Models
+
+## Trolley Tokens
+Trolley Tokens in various sizes. They can be used also as decoration for keyrings.
+For customisation options, have a look at [example_token.json](config/example_token.json).
+
+[Available also on prusaprinters.org](https://www.prusaprinters.org/prints/135899-trolley-tokens-i-got-them-all)
+
+<img src="res/snapshots/example_token.png" alt="example token" width="200"/>
+
+
+
+## Smartphone Cases
+Smartphone cases for various brands. There are versions for TPU and PETG.
+For customisation options, have a look at [example_smartphone_case.json](config/example_smartphone_case.json).
+
+<img src="res/snapshots/example_smartphone_case.png" alt="example token" width="200"/>
+
+
+# Usage
 
 ## 3dgen Docker Image
+
+The 3D model generator is released as a docker image on dockerhub: 
 https://hub.docker.com/r/gravity981/3dgen
 
 ![3dgen version](https://img.shields.io/docker/v/gravity981/3dgen)
 ![docker pulls](https://img.shields.io/docker/pulls/gravity981/3dgen)
-
-# Usage
 
 ## Example 1
 As soon as you have installed docker on your system it's as simple as that:
@@ -42,13 +63,13 @@ docker run -v $PWD:/work gravity981/3dgen \
 This will mount the current working directory (`$PWD`) to the docker container to make it work with input/output files from there.
 In this example the generated model file is saved to your current working directory under `output/example_token`.
 
-To customize a model, have a look at [example_token.json](config/example_token.json). 
-This file contains parameters which can be customized for the token model. 
+
+The `example_token.json` file contains parameters which can be customized for the token model. 
 Create your own copy of this file and pass it with the `-c` argument to the generator. 
 Make sure it is located in the directory which is mounted to the docker container. 
 > :information_source: Customizable parameters are specific to the selected model.
 
-The options `--thumbnails` causes the generator to output an additionl picture (.png) of the model.
+The option `--thumbnails` causes the generator to output an additionl picture (.png) of the model.
 
 
 ## Arguments
