@@ -41,8 +41,7 @@ For customisation options, have a look at [example_smartphone_case.json](config/
 The 3D model generator is released as a docker image on dockerhub: 
 https://hub.docker.com/r/gravity981/3dgen
 
-![3dgen version](https://img.shields.io/docker/v/gravity981/3dgen)
-![docker pulls](https://img.shields.io/docker/pulls/gravity981/3dgen)
+![3dgen version](https://img.shields.io/docker/v/gravity981/3dgen?sort=semver)
 
 ## Example 1
 As soon as you have installed docker on your system it's as simple as that:
