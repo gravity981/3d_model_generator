@@ -1,46 +1,82 @@
 {
-  "name": "all_smartphone_c",
+  "name": "all_smartphone_cases",
   "model": "smartphone_case.scad",
-  "global": {
-    "font": "Marsh Stencil"
-  },
   "layers": [
     [
       {
         "baseModelFilePath": "/meshes/case_iphone_13_flat_petg v2.3mf",
-        "name": "case_iphone13_flat_petg"
+        "name": "case_iphone_13_flat_petg",
+        "case_height": 149.7,
+        "case_width": 74.6
       },
       {
         "baseModelFilePath": "/meshes/case_iphone_13_petg v4.3mf",
-        "name": "case_iphone_13_petg"
+        "name": "case_iphone_13_petg",
+        "case_height": 149.7,
+        "case_width": 74.6
       },
       {
         "baseModelFilePath": "/meshes/case_iphone_13_tpu v2.3mf",
-        "name": "case_iphone_13_tpu"
+        "name": "case_iphone_13_tpu",
+        "case_height": 149.7,
+        "case_width": 74.6
       },
       {
         "baseModelFilePath": "/meshes/case_samsung_S20_petg v2.3mf",
-        "name": "case_samsung_S20_petg"
+        "name": "case_samsung_S20_petg",
+        "case_height": 154.1,
+        "case_width": 71.5
       },
       {
         "baseModelFilePath": "/meshes/case_samsung_S20_tpu v8.3mf",
-        "name": "case_samsung_S20_tpu"
+        "name": "case_samsung_S20_tpu",
+        "case_height": 154.1,
+        "case_width": 71.5
       }
     ],
     [
       {
-        "decal_text": "Hello World",
-        "horizontal_offset": 95,
-        "vertical_offset": 35,
+        "decal_text": "",
+        "name": "blank"
+      },
+      {
+        "decal_text": "gravity",
         "font_size": 10
       },
       {
         "decal_text": "★",
         "name": "star",
         "font": "Segoe Ui Symbol",
-        "z_rotation:": 36,
-        "vertical_offset": 35,
-        "font_size": 15
+        "z_rotation": 90,
+        "font_size": 20
+      },
+      {
+        "decal_text": "♠",
+        "name": "spades",
+        "font": "Segoe Ui Symbol",
+        "z_rotation": 90,
+        "font_size": 20
+      },
+      {
+        "decal_text": "♥",
+        "name": "heart",
+        "font": "Segoe Ui Symbol",
+        "z_rotation": 90,
+        "font_size": 20
+      },
+      {
+        "decal_text": "♦",
+        "name": "diamond",
+        "font": "Segoe Ui Symbol",
+        "z_rotation": 90,
+        "font_size": 20
+      },
+      {
+        "decal_text": "♣",
+        "name": "clover",
+        "font": "Segoe Ui Symbol",
+        "z_rotation": 90,
+        "font_size": 20
       }
     ]
   ]
