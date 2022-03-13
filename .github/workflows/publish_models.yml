@@ -19,14 +19,17 @@ jobs:
           registry: docker.io
           image: gravity981/3dgen:${{ env.DOCKER_IMAGE_VERSION }}
           options: -v ${{ github.workspace }}:/work --user root
-          run: /usr/bin/model_generator_wrapper.sh -m models -c config/all_tokens.json -o output/tokens -t -p
+          run: |
+            /usr/bin/model_generator_wrapper.sh -m models -c config/all_tokens.json -o output/tokens -t -p
+            /usr/bin/model_generator_wrapper.sh -m models -c config/all_smartphone_cases.json -o output/smartphone_cases -t -p
       
       - name: upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: "token_package"
+          name: "model_package"
           path: |
             output/tokens
+            output/smartphone_cases
             
   publish:
     runs-on: ubuntu-latest
@@ -38,14 +41,17 @@ jobs:
       - name: download artifacts
         uses: actions/download-artifact@v1
         with:
-          name: "token_package"
+          name: "model_package"
         
       - name: zip artifacts
         uses: thedoctor0/zip-release@master
         with:
-          path: './token_package/3d'
+          path: './model_package'
           type: 'zip'
-          filename: 'token_package.zip'
+          filename: 'model_package.zip'
+
+      - name: list files
+        run: tree ./model_package
 
       - name: get latest tag
         uses: actions-ecosystem/action-get-latest-tag@v1
@@ -54,7 +60,7 @@ jobs:
       - name: publish github release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "token_package.zip,token_package/poster.png"
+          artifacts: "model_package.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: true
           tag: ${{ steps.get-latest-tag.outputs.tag }}
