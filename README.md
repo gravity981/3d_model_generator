@@ -1,8 +1,8 @@
 # 3D Model Generator
 This project is about generating parametric 3D models. The generated files can be processed with a slicer and then sent to a 3D printer. 
 
-![latest version](https://img.shields.io/github/v/release/gravity981/3d_model_generator)
 ![CI](https://github.com/gravity981/3d_model_generator/actions/workflows/continous_integration.yml/badge.svg)
+
 
 ## Tokens
 Tokens can be used for example in shopping trolleys.
@@ -10,9 +10,16 @@ Tokens can be used for example in shopping trolleys.
 <img src="example.png" alt="example token" width="200"/>
 
 
-# Releases
-You can download the latest package with stl files from the release section. If you want to build the files on your own or want to modify something, please read on.
+## Model Package Releases
+![latest version](https://img.shields.io/github/v/release/gravity981/3d_model_generator)
 
+You can download the latest package with stl files from the github release section. If you want to build the files on your own or want to modify something, please read on.
+
+## 3dgen Docker Image
+https://hub.docker.com/r/gravity981/3dgen
+
+![3dgen version](https://img.shields.io/docker/v/gravity981/3dgen)
+![docker pulls](https://img.shields.io/docker/pulls/gravity981/3dgen)
 
 # Usage
 
