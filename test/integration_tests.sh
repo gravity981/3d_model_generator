@@ -28,5 +28,5 @@ test -d output/example_token/intermediate || exit 1
 test -f output/example_token/intermediate/openscad.json || exit 1
 test -d output/example_token/thumbnail || exit 1
 test -f output/example_token/thumbnail/token_2CHF_star.png || exit 1
-test -f output/example_token/poster.png || exit 1
+test -f output/example_token/example_token.png || exit 1
 rm -rf output
