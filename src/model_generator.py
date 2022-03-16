@@ -149,7 +149,7 @@ def main():
     # stitch thumbnails together to a poster
     if config.thumbnails and config.poster:
         columns = math.sqrt(next_perfect_square(count))
-        if not SystemCommands.generate_poster(columns, config.output_dir):
+        if not SystemCommands.generate_poster(columns, config.data['name'], config.output_dir):
             return False
 
     return True

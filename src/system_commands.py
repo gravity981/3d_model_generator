@@ -41,9 +41,9 @@ class SystemCommands:
         return True
 
     @staticmethod
-    def generate_poster(columns: int, output_dir, dry_run: bool = False) -> bool:
-        command = 'montage -tile {}x0 -geometry +0+0 "{}/thumbnail/*.png" "{}/poster.png"' \
-            .format(columns, output_dir, output_dir)
+    def generate_poster(columns: int, poster_name: str, output_dir, dry_run: bool = False) -> bool:
+        command = 'montage -tile {}x0 -geometry +0+0 "{}/thumbnail/*.png" "{}/{}.png"' \
+            .format(columns, output_dir, output_dir, poster_name)
         if dry_run:
             print(command)
             return True
