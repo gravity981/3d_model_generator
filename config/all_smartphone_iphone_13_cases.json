@@ -1,0 +1,69 @@
+{
+  "name": "all_smartphone_iphone_13_cases",
+  "model": "smartphone_case.scad",
+  "global": {
+    "case_height": 149.7,
+    "case_width": 74.6
+  },
+  "layers": [
+    [
+      {
+        "baseModelFilePath": "/meshes/case_iphone_13_flat_petg v2.3mf",
+        "name": "case_iphone_13_flat_petg"
+      },
+      {
+        "baseModelFilePath": "/meshes/case_iphone_13_petg v4.3mf",
+        "name": "case_iphone_13_petg"
+      },
+      {
+        "baseModelFilePath": "/meshes/case_iphone_13_tpu v2.3mf",
+        "name": "case_iphone_13_tpu"
+      }
+    ],
+    [
+      {
+        "decal_text": "",
+        "name": "blank"
+      },
+      {
+        "decal_text": "gravity",
+        "font_size": 10
+      },
+      {
+        "decal_text": "★",
+        "name": "star",
+        "font": "Segoe Ui Symbol",
+        "z_rotation": 90,
+        "font_size": 20
+      },
+      {
+        "decal_text": "♠",
+        "name": "spades",
+        "font": "Segoe Ui Symbol",
+        "z_rotation": 90,
+        "font_size": 20
+      },
+      {
+        "decal_text": "♥",
+        "name": "heart",
+        "font": "Segoe Ui Symbol",
+        "z_rotation": 90,
+        "font_size": 20
+      },
+      {
+        "decal_text": "♦",
+        "name": "diamond",
+        "font": "Segoe Ui Symbol",
+        "z_rotation": 90,
+        "font_size": 20
+      },
+      {
+        "decal_text": "♣",
+        "name": "clover",
+        "font": "Segoe Ui Symbol",
+        "z_rotation": 90,
+        "font_size": 20
+      }
+    ]
+  ]
+}

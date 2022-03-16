@@ -21,16 +21,18 @@ jobs:
           options: -v ${{ github.workspace }}:/work --user root
           run: |
             /usr/bin/model_generator_wrapper.sh -m models -c /conf/all_tokens.json -o output/tokens -t -p
-            /usr/bin/model_generator_wrapper.sh -m models -c /conf/all_smartphone_cases.json -o output/smartphone_cases -t -p
-      
+            /usr/bin/model_generator_wrapper.sh -m models -c /conf/all_smartphone_samsung_s20_cases.json -o output/smartphone_samsung_s20_cases -t -p
+            /usr/bin/model_generator_wrapper.sh -m models -c /conf/all_smartphone_iphone_13_cases.json -o output/smartphone_iphone_13_cases -t -p
+
       - name: upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: "model_package"
           path: |
             output/tokens
-            output/smartphone_cases
-            
+            output/smartphone_samsung_s20_cases
+            output/smartphone_iphone_13_cases
+
   publish:
     runs-on: ubuntu-latest
     needs: [ build ]
@@ -60,7 +62,7 @@ jobs:
       - name: publish github release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "model_package.zip"
+          artifacts: "model_package.zip,./model_package/*/*.png"
           token: ${{ secrets.GITHUB_TOKEN }}
           draft: true
           tag: ${{ steps.get-latest-tag.outputs.tag }}
